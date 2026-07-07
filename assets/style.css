@@ -1,0 +1,177 @@
+/* ---------------------------------------------------------
+   SDG 7 Project Blog — "Meter Readout" design system
+   Palette: desert sand / petrol ink / solar amber
+--------------------------------------------------------- */
+:root {
+  --sand: #f3eee1;
+  --sand-deep: #e9e2cf;
+  --ink: #14313c;
+  --ink-soft: #3f5a63;
+  --solar: #e8930c;
+  --solar-soft: #f7c46a;
+  --alert: #b8452a;
+  --line: #cfc5aa;
+  --card: #faf7ee;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --body: "Newsreader", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.1rem;
+  line-height: 1.72;
+}
+
+a { color: var(--ink); text-decoration-color: var(--solar); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--alert); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--solar); outline-offset: 2px; }
+
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* --- Meter strip (signature element) --- */
+.meter {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding: 0.45rem 0;
+}
+.meter .cell { padding-right: 0.6rem; border-right: 1px solid var(--line); }
+.meter .cell:last-child { border-right: none; }
+.meter .charge {
+  display: inline-flex; gap: 2px; margin-left: auto;
+}
+.meter .charge i {
+  width: 7px; height: 12px; background: var(--sand-deep);
+  border: 1px solid var(--line); border-radius: 1px;
+}
+.meter .charge i.on { background: var(--solar); border-color: var(--solar); }
+
+/* --- Site header --- */
+header.site {
+  padding: 1.1rem 0 0;
+}
+header.site .brand {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 0.7rem;
+}
+header.site .brand a { text-decoration: none; }
+
+/* --- Hero --- */
+.hero { padding: 3.2rem 0 2.4rem; border-bottom: 1px solid var(--line); }
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.1rem;
+}
+.hero h1 em { font-style: normal; color: var(--solar); }
+.hero p.lede { font-size: 1.2rem; color: var(--ink-soft); max-width: 60ch; margin: 0; }
+
+/* --- Entry cards --- */
+.entries { padding: 2.2rem 0 3rem; display: grid; gap: 1rem; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem 1.25rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(20, 49, 60, 0.08); }
+.card h2 { font-family: var(--display); font-weight: 700; font-size: 1.35rem; margin: 0.55rem 0 0.35rem; line-height: 1.2; }
+.card h2 a { text-decoration: none; }
+.card h2 a:hover { color: var(--alert); }
+.card p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+
+/* --- Post pages --- */
+.post-head { padding: 2.4rem 0 1.4rem; }
+.post-head h1 {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  line-height: 1.08; letter-spacing: -0.02em; margin: 0.9rem 0 0.4rem;
+}
+.post-head .date { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-soft); }
+
+article.post { padding-bottom: 2.5rem; }
+article.post h2 {
+  font-family: var(--display); font-weight: 700; font-size: 1.45rem;
+  margin: 2.2rem 0 0.6rem; letter-spacing: -0.01em;
+}
+article.post h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; margin: 1.6rem 0 0.4rem; }
+
+/* TODO note blocks — delete before publishing */
+.todo {
+  font-family: var(--mono); font-size: 0.85rem; line-height: 1.55;
+  background: #fff6e3; border: 1px dashed var(--solar);
+  border-radius: 8px; padding: 0.8rem 1rem; color: #7a5200;
+  margin: 1rem 0;
+}
+.todo::before { content: "✎ TO DO — delete this box before publishing"; display: block; font-weight: 700; margin-bottom: 0.3rem; }
+
+/* Figures & evidence */
+figure { margin: 1.6rem 0; }
+figure img { width: 100%; border-radius: 8px; border: 1px solid var(--line); display: block; }
+figcaption { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.5rem; }
+
+/* Data tables */
+table { width: 100%; border-collapse: collapse; margin: 1.4rem 0; font-size: 0.95rem; }
+th { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; text-align: left; border-bottom: 2px solid var(--ink); padding: 0.5rem 0.6rem; }
+td { border-bottom: 1px solid var(--line); padding: 0.55rem 0.6rem; font-variant-numeric: tabular-nums; }
+tr td:first-child, tr th:first-child { padding-left: 0; }
+
+/* Callout for calculations */
+.calc {
+  background: var(--ink); color: var(--sand);
+  border-radius: 10px; padding: 1rem 1.2rem; margin: 1.4rem 0;
+  font-family: var(--mono); font-size: 0.9rem; line-height: 1.65;
+  overflow-x: auto;
+}
+.calc .label { color: var(--solar-soft); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; display: block; margin-bottom: 0.4rem; }
+
+/* References */
+.refs { border-top: 2px solid var(--ink); margin-top: 2.5rem; padding-top: 1rem; }
+.refs h2 { margin-top: 0.4rem; }
+.refs ol { padding-left: 1.2rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+/* Prev / next nav */
+.pager {
+  display: flex; justify-content: space-between; gap: 1rem;
+  border-top: 1px solid var(--line); padding: 1.4rem 0 3rem;
+  font-family: var(--mono); font-size: 0.85rem;
+}
+.pager a { text-decoration: none; border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem 0.9rem; background: var(--card); }
+.pager a:hover { border-color: var(--solar); }
+
+footer.site {
+  border-top: 2px solid var(--ink);
+  font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft);
+  padding: 1.2rem 0 2.4rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem;
+}
+
+@media (max-width: 560px) {
+  body { font-size: 1.03rem; }
+  .meter { flex-wrap: wrap; }
+}
