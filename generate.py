@@ -56,9 +56,10 @@ ENTRIES = [
 <p>[Your text here]</p>
 
 <figure>
-  <img src="../assets/IMG-demand-chart.png" alt="Chart of Bahrain electricity demand growth">
-  <figcaption>FIG 2.1 — Bahrain electricity consumption over time. Source: [ ], [year].</figcaption>
+  <img src="../assets/IMG-demand-chart.png" alt="Bar chart: Bahrain peak demand 3.4 GW in 2016 projected to 6.5 GW in 2030">
+  <figcaption>FIG 2.1 — Bahrain's summer peak demand, 2016 actual vs 2030 projection. Source: Electricity &amp; Water master plan (via Enerdata). [Verify against the latest EWA report and update if needed.]</figcaption>
 </figure>
+<div class="todo">Useful verified numbers for this entry: per-capita gas-fired generation in Bahrain was the HIGHEST in the world in 2023 at about 22,986 kWh/person (Ember, Global Electricity Review 2025). Verify and cite before using.</div>
 """),
     dict(n=3, stage=2, stage_label="STAGE 2 · CURRENT SYSTEM",
         title="The Current System: An Island Grid Built on Gas",
@@ -67,6 +68,11 @@ ENTRIES = [
 <h2>Generation today</h2>
 <div class="todo">Describe Bahrain's current fleet: gas-fired combined-cycle and thermal stations (Al Dur, Al Ezzel, Riffa, Al Hidd — verify names, capacities and shares from EWA). State that generation is effectively ~100% natural gas and where the gas comes from (Khuff field). Include a simple mix chart or table.</div>
 <p>[Your text here]</p>
+
+<figure>
+  <img src="../assets/IMG-mix-chart.png" alt="Bar chart: 99.9 percent of Bahrain electricity comes from natural gas">
+  <figcaption>FIG 3.1 — Bahrain electricity generation by source. Source: World Bank / IEA, 2022 (natural gas = 99.85%). [Re-verify the latest year.]</figcaption>
+</figure>
 
 <h2>The carbon cost — my calculation</h2>
 <div class="todo">RUBRIC: A-grade requires "sound data" and calculations. Show every step and the source of every number.</div>
@@ -96,8 +102,13 @@ Avoided CO₂ per kWh            = [Y] kg  →  [ ] kt/yr if [ ] GWh switched
 </div>
 
 <h2>Honest trade-offs</h2>
-<div class="todo">Intermittency vs evening AC peak, storage cost, dust soiling, land scarcity (why Bahrain can't copy Saudi mega-projects), grid integration limits. Compare against NREAP's own targets: is 10% by 2035 ambitious or timid?</div>
+<div class="todo">Intermittency vs evening AC peak, storage cost, dust soiling, land scarcity (why Bahrain can't copy Saudi mega-projects), grid integration limits. Compare against NREAP's own targets — note they were REVISED in 2023 (roughly: 255 MW renewable capacity by 2025 and 710 MW by 2035, but only ~18 MW installed by end of 2024, per Enerdata). Is that ambitious or timid? The chart below is your strongest evidence.</div>
 <p>[Your text here]</p>
+
+<figure>
+  <img src="../assets/IMG-targets-chart.png" alt="Bar chart comparing 18 MW installed renewables with 255 MW and 710 MW targets">
+  <figcaption>FIG 4.1 — Bahrain's renewable capacity: installed (end 2024) vs NREAP targets. Sources: NREAP (2017, rev. 2023); installed capacity via Enerdata. [Verify against sea.gov.bh before submission.]</figcaption>
+</figure>
 
 <h2>My justified judgement</h2>
 <div class="todo">RUBRIC KEYWORD: the A-descriptor says "reaches a well-justified judgement on how well each system meets regional and global energy needs sustainably". Write a clear verdict: what mix should Bahrain target by 2035 and why — grounded in YOUR numbers from this entry and Entry 3. This paragraph is also your strongest viva answer.</div>
