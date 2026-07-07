@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-label="Desert landscape with solar panels and transmission tower under an amber sun">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0f14"/>
+      <stop offset="0.65" stop-color="#12202c"/>
+      <stop offset="1" stop-color="#1a2a36"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffb020" stop-opacity="0.9"/>
+      <stop offset="0.4" stop-color="#ffb020" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#ffb020" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dune1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c2b38"/><stop offset="1" stop-color="#141f29"/>
+    </linearGradient>
+    <linearGradient id="dune2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16222e"/><stop offset="1" stop-color="#0e161f"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#28455c"/><stop offset="1" stop-color="#173044"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="420" fill="url(#sky)"/>
+
+  <!-- grid dots -->
+  <g fill="#3ec6de" opacity="0.12">
+    <circle cx="120" cy="60" r="1.5"/><circle cx="300" cy="40" r="1.5"/><circle cx="520" cy="70" r="1.5"/>
+    <circle cx="760" cy="50" r="1.5"/><circle cx="640" cy="110" r="1.5"/><circle cx="200" cy="120" r="1.5"/>
+  </g>
+
+  <!-- sun -->
+  <circle cx="660" cy="140" r="150" fill="url(#sunGlow)"/>
+  <circle cx="660" cy="140" r="52" fill="#ffb020"/>
+  <circle cx="660" cy="140" r="52" fill="none" stroke="#ffd479" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- dunes -->
+  <path d="M0 300 Q 180 250 360 295 T 900 285 V420 H0 Z" fill="url(#dune1)"/>
+  <path d="M0 340 Q 220 305 460 338 T 900 330 V420 H0 Z" fill="url(#dune2)"/>
+
+  <!-- transmission tower -->
+  <g stroke="#5b7d97" stroke-width="2.5" fill="none" opacity="0.9">
+    <path d="M120 300 L150 140 L180 300"/>
+    <path d="M132 240 H168 M126 270 H174 M138 205 H162"/>
+    <path d="M110 160 H190"/>
+    <path d="M105 175 L110 160 M195 175 L190 160"/>
+  </g>
+  <!-- power line with moving current -->
+  <path d="M190 162 C 340 210, 520 220, 900 190" fill="none" stroke="#2c4356" stroke-width="2"/>
+  <path d="M190 162 C 340 210, 520 220, 900 190" fill="none" stroke="#ffb020" stroke-width="2"
+        stroke-dasharray="7 14">
+    <animate attributeName="stroke-dashoffset" from="0" to="-21" dur="1.4s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- solar array -->
+  <g>
+    <g transform="translate(430 318)">
+      <rect x="-4" y="26" width="8" height="30" fill="#22384a"/>
+      <g transform="skewX(-18)">
+        <rect x="-60" y="-6" width="120" height="36" rx="3" fill="url(#panel)" stroke="#3ec6de" stroke-opacity="0.5"/>
+        <path d="M-60 12 H60 M-30 -6 V30 M0 -6 V30 M30 -6 V30" stroke="#0a0f14" stroke-width="1.5"/>
+      </g>
+    </g>
+    <g transform="translate(590 330)">
+      <rect x="-4" y="26" width="8" height="26" fill="#22384a"/>
+      <g transform="skewX(-18)">
+        <rect x="-60" y="-6" width="120" height="36" rx="3" fill="url(#panel)" stroke="#3ec6de" stroke-opacity="0.5"/>
+        <path d="M-60 12 H60 M-30 -6 V30 M0 -6 V30 M30 -6 V30" stroke="#0a0f14" stroke-width="1.5"/>
+      </g>
+    </g>
+    <g transform="translate(750 322)">
+      <rect x="-4" y="26" width="8" height="28" fill="#22384a"/>
+      <g transform="skewX(-18)">
+        <rect x="-60" y="-6" width="120" height="36" rx="3" fill="url(#panel)" stroke="#3ec6de" stroke-opacity="0.5"/>
+        <path d="M-60 12 H60 M-30 -6 V30 M0 -6 V30 M30 -6 V30" stroke="#0a0f14" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- glints -->
+  <circle cx="452" cy="322" r="2.5" fill="#8fe6f5">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="612" cy="334" r="2.5" fill="#8fe6f5">
+    <animate attributeName="opacity" values="1;0.2;1" dur="3.6s" repeatCount="indefinite"/>
+  </circle>
+</svg>

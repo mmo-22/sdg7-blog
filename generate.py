@@ -1,5 +1,34 @@
-# Generates index.html and posts/entry-1..8.html
-# Run once: python3 generate.py  (safe to re-run; overwrites pages)
+# Generates index.html and posts/entry-1..8.html — full website layout
+# Run once: python3 generate.py  (DO NOT re-run after writing content — it overwrites pages)
+
+# Per-entry SVG motif icons (line art, drawn inline in banners and cards)
+ICONS = {
+ 1: '<circle cx="32" cy="32" r="22" fill="none" stroke="#ffb020" stroke-width="2.5"/><circle cx="32" cy="32" r="13" fill="none" stroke="#3ec6de" stroke-width="2"/><circle cx="32" cy="32" r="4" fill="#ffb020"/>',
+ 2: '<path d="M12 50 V34 H22 V50 M27 50 V24 H37 V50 M42 50 V14 H52 V50" fill="none" stroke="#3ec6de" stroke-width="2.5"/><path d="M10 50 H54" stroke="#ffb020" stroke-width="2.5"/>',
+ 3: '<path d="M32 10 C24 22 20 28 20 36 a12 12 0 0 0 24 0 c0-8-4-14-12-26z" fill="none" stroke="#ffb020" stroke-width="2.5"/><path d="M32 28 c-3 5-5 7-5 10 a5 5 0 0 0 10 0 c0-3-2-5-5-10z" fill="#f2555a"/>',
+ 4: '<rect x="12" y="16" width="40" height="26" rx="2" fill="none" stroke="#3ec6de" stroke-width="2.5"/><path d="M12 29 H52 M25 16 V42 M39 16 V42" stroke="#3ec6de" stroke-width="1.5"/><path d="M32 42 V52 M24 52 H40" stroke="#ffb020" stroke-width="2.5"/>',
+ 5: '<path d="M14 44 a18 18 0 1 1 36 0" fill="none" stroke="#3ec6de" stroke-width="2.5"/><path d="M32 44 L42 26" stroke="#ffb020" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="44" r="3.5" fill="#ffb020"/>',
+ 6: '<path d="M32 12 V50 M20 50 H44" stroke="#ffb020" stroke-width="2.5"/><path d="M14 22 H50" stroke="#3ec6de" stroke-width="2.5"/><path d="M14 22 l-6 12 a8 6 0 0 0 12 0 z M50 22 l-6 12 a8 6 0 0 0 12 0 z" fill="none" stroke="#3ec6de" stroke-width="2"/>',
+ 7: '<circle cx="22" cy="22" r="6" fill="none" stroke="#3ec6de" stroke-width="2.5"/><circle cx="42" cy="22" r="6" fill="none" stroke="#ffb020" stroke-width="2.5"/><path d="M12 48 a10 10 0 0 1 20 0 M32 48 a10 10 0 0 1 20 0" fill="none" stroke="#3ec6de" stroke-width="2.5"/>',
+ 8: '<circle cx="32" cy="32" r="22" fill="none" stroke="#3ec6de" stroke-width="2.5"/><path d="M21 33 l8 8 14-18" fill="none" stroke="#ffb020" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>',
+}
+
+def icon(n, size=64):
+    return f'<svg viewBox="0 0 64 64" width="{size}" height="{size}" aria-hidden="true">{ICONS[n]}</svg>'
+
+def charge(stage):
+    bars = "".join(f'<i class="{"on" if i < stage else ""}"></i>' for i in range(5))
+    return f'<span class="charge">{bars}</span>'
+
+NAV = """<nav class="topnav"><div class="wrap">
+  <a class="logo" href="{home}"><span class="led"></span>SDG7<span class="dim">.PROJECT</span></a>
+  <div class="links">
+    <a href="{home}#project">The Project</a>
+    <a href="{home}#entries">Entries</a>
+    <a href="{home}#stages">Stages</a>
+    <a href="{home}#author">Author</a>
+  </div>
+</div></nav>"""
 
 HEAD = """<!DOCTYPE html>
 <html lang="en">
@@ -12,33 +41,12 @@ HEAD = """<!DOCTYPE html>
 <link rel="stylesheet" href="{css}">
 </head>
 <body>
-<div class="statusbar"><div class="row">
-  <span><span class="led"></span><b>GRID.MONITOR</b></span>
-  <span class="sys">SDG-7 // CLEAN ENERGY</span>
-  <span>OP: <b>M.O.ALOTAIBI</b></span>
-  <span>FREQ: <b>60.00 Hz</b></span>
-  <span class="clock" id="clk">--:--:--</span>
-</div></div>
-<div class="flow"><svg viewBox="0 0 860 88" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-  <rect class="node" x="30"  y="28" width="130" height="32" rx="4"/>
-  <rect class="node" x="365" y="28" width="130" height="32" rx="4"/>
-  <rect class="node" x="700" y="28" width="130" height="32" rx="4"/>
-  <text x="95"  y="48" text-anchor="middle">OIL / GAS</text>
-  <text x="430" y="48" text-anchor="middle">GRID · KSA</text>
-  <text x="765" y="48" text-anchor="middle">SOLAR PV</text>
-  <path class="wire"    d="M160 44 H365"/>
-  <path class="current" d="M160 44 H365"/>
-  <path class="wire"        d="M700 44 H495"/>
-  <path class="current alt" d="M700 44 H495"/>
-  <text x="262" y="34" text-anchor="middle" fill="#b97f13">TODAY</text>
-  <text x="597" y="34" text-anchor="middle" fill="#3ec6de">2030 →</text>
-</svg></div>
-<header class="site"></header>
 """
 
 FOOT = """<footer class="site"><div class="wrap">
-  <span>INDIVIDUAL PROJECT · 2026 · ALL SYSTEMS NOMINAL</span>
+  <span>INDIVIDUAL PROJECT · 2026</span>
   <span>SDG 7 — AFFORDABLE AND CLEAN ENERGY</span>
+  <span class="clock" id="clk">--:--:--</span>
 </div></footer>
 <script>
 (function(){var e=document.getElementById("clk");if(!e)return;
@@ -48,11 +56,6 @@ t();setInterval(t,1000)})();
 </body>
 </html>
 """
-
-def charge(stage):
-    # 5 bars, filled up to stage number (0 = intro/reflection style)
-    bars = "".join(f'<i class="{"on" if i < stage else ""}"></i>' for i in range(5))
-    return f'<span class="charge">{bars}</span>'
 
 ENTRIES = [
     dict(n=1, stage=1, stage_label="STAGE 1 · SDG RESEARCH",
@@ -229,19 +232,21 @@ REFS = """
 # ---- Build post pages ----
 for e in ENTRIES:
     n = e["n"]
-    prev_link = f'<a href="entry-{n-1}.html">← Entry {n-1:02d}</a>' if n > 1 else '<a href="../index.html">← All entries</a>'
-    next_link = f'<a href="entry-{n+1}.html">Entry {n+1:02d} →</a>' if n < 8 else '<a href="../index.html">Back to index →</a>'
-    html = HEAD.format(title=f'{e["title"]} — SDG 7 Project', css="../assets/style.css", home="../index.html")
-    html += f"""<main class="wrap">
-<div class="post-head">
-  <div class="meter">
-    <span class="id">MODULE {n:02d}/08</span>
-    <span>{e["stage_label"]}</span>
-    {charge(e["stage"])}
+    prev_link = f'<a href="entry-{n-1}.html">&larr; Entry {n-1:02d}</a>' if n > 1 else '<a href="../index.html#entries">&larr; All entries</a>'
+    next_link = f'<a href="entry-{n+1}.html">Entry {n+1:02d} &rarr;</a>' if n < 8 else '<a href="../index.html#entries">Back to site &rarr;</a>'
+    html = HEAD.format(title=f'{e["title"]} — SDG 7 Project', css="../assets/style.css")
+    html += NAV.format(home="../index.html")
+    html += f"""<div class="banner">
+  <div class="wrap banner-in">
+    <div class="banner-icon">{icon(n, 84)}</div>
+    <div>
+      <div class="crumb">MODULE {n:02d}/08 · {e["stage_label"]} {charge(e["stage"])}</div>
+      <h1>{e["title"]}</h1>
+      <div class="date">Published: [DATE — set the real date you publish]</div>
+    </div>
   </div>
-  <h1>{e["title"]}</h1>
-  <div class="date">Published: [DATE — set the real date you publish]</div>
 </div>
+<main class="wrap">
 <article class="post">
 {e["sections"]}
 {REFS}
@@ -253,36 +258,82 @@ for e in ENTRIES:
     with open(f"posts/entry-{n}.html", "w") as f:
         f.write(html)
 
-# ---- Build index ----
+# ---- Build index (website landing) ----
 cards = ""
 for e in ENTRIES:
-    cards += f"""<div class="module">
-  <div class="head">
-    <span class="id">MODULE {e["n"]:02d}</span>
-    <span>{e["stage_label"]}</span>
-    {charge(e["stage"])}
-  </div>
-  <div class="body">
-    <h2><a href="posts/entry-{e["n"]}.html">{e["title"]}</a></h2>
+    cards += f"""<a class="tile" href="posts/entry-{e["n"]}.html">
+  <div class="tile-visual">{icon(e["n"], 72)}<span class="tile-id">{e["n"]:02d}</span></div>
+  <div class="tile-body">
+    <div class="tile-meta">{e["stage_label"]} {charge(e["stage"])}</div>
+    <h3>{e["title"]}</h3>
     <p>{e["desc"]}</p>
   </div>
-</div>
+</a>
 """
 
-index = HEAD.format(title="SDG 7 Project — Affordable and Clean Energy", css="assets/style.css", home="index.html")
-index += f"""<main class="wrap">
-<section class="hero">
-  <div class="eyebrow">/// PROJECT LOG — 8 MODULES — 5 ASSESSMENT STAGES</div>
-  <h1>Can the desert that exports oil<br>run on <span class="hl">sunlight</span>?</h1>
-  <p class="lede">An eight-entry project blog assessing Saudi Arabia's current energy system against utility-scale solar, through the lens of UN Sustainable Development Goal 7 — with real measurements, real calculations, and a real audience.</p>
+STAGES = [
+ ("01","SDG Research","Targets, indicators and the energy need — Entries 1–2"),
+ ("02","System Assessment","Current grid vs solar, with calculations — Entries 3–4"),
+ ("03","Practical Activity","Hands-on energy audit with a power meter — Entry 5"),
+ ("04","Ethics & Equity","Energy justice framework applied — Entry 6"),
+ ("05","Social Awareness","Session with 10 participants + quiz — Entry 7"),
+]
+stages_html = "".join(f"""<div class="stage">
+  <div class="stage-n">{s[0]}</div>
+  <div><h3>{s[1]}</h3><p>{s[2]}</p></div>
+</div>""" for s in STAGES)
+
+index = HEAD.format(title="SDG 7 Project — Affordable and Clean Energy", css="assets/style.css")
+index += NAV.format(home="index.html")
+index += f"""
+<section class="hero-site">
+  <div class="hero-art"><img src="assets/hero.svg" alt="Desert landscape with solar panels and a transmission tower under an amber sun"></div>
+  <div class="wrap hero-copy">
+    <div class="eyebrow">/// SDG 7 · AFFORDABLE AND CLEAN ENERGY · INDIVIDUAL PROJECT</div>
+    <h1>Can the desert that exports oil<br>run on <span class="hl">sunlight</span>?</h1>
+    <p class="lede">Assessing Saudi Arabia's oil-and-gas grid against utility-scale solar — with real measurements, worked calculations, and a real audience.</p>
+    <div class="cta-row">
+      <a class="btn btn-solar" href="#entries">Read the 8 entries</a>
+      <a class="btn" href="#stages">The 5 stages</a>
+    </div>
+  </div>
 </section>
-<section class="entries">
+
+<section class="stats"><div class="wrap stats-in">
+  <div class="stat"><b>[ X ] TWh</b><span>KSA annual electricity — Entry 2</span></div>
+  <div class="stat"><b>[ X ] Mt CO₂</b><span>Grid emissions computed — Entry 3</span></div>
+  <div class="stat"><b>[ X ] $/kWh</b><span>Sudair solar tariff — Entry 4</span></div>
+  <div class="stat"><b>10</b><span>Awareness participants — Entry 7</span></div>
+</div></section>
+
+<section id="project" class="section"><div class="wrap">
+  <h2 class="sec-title">The Project</h2>
+  <p class="sec-lede">This site documents an individual assessment project built around <b>UN Sustainable Development Goal 7</b>: ensuring access to affordable, reliable, sustainable and modern energy for all. Across eight entries it researches the goal, assesses the current Saudi energy system against a solar-powered alternative with data and calculations, evidences a hands-on energy audit, examines the ethics of the transition, and reports a live awareness session.</p>
+  <div class="todo">Rewrite this paragraph in your own words after you finish the entries — it's the first thing the assessor reads.</div>
+</div></section>
+
+<section id="entries" class="section"><div class="wrap">
+  <h2 class="sec-title">The Entries</h2>
+  <div class="grid">
 {cards}
-</section>
-</main>
+  </div>
+</div></section>
+
+<section id="stages" class="section alt"><div class="wrap">
+  <h2 class="sec-title">Five Assessment Stages</h2>
+  <div class="stages">{stages_html}</div>
+</div></section>
+
+<section id="author" class="section"><div class="wrap author-in">
+  <div class="author-badge">MA</div>
+  <div>
+    <h2 class="sec-title" style="margin-bottom:.3rem;">Mohammed O. Alotaibi</h2>
+    <p class="sec-lede" style="margin:0;">IT specialist and engineering student, Al-Khobar, Saudi Arabia. [One or two more lines about you and this course.]</p>
+  </div>
+</div></section>
 """
 index += FOOT
 with open("index.html", "w") as f:
     f.write(index)
 
-print("Generated index.html and 8 posts.")
+print("Generated website: index.html + 8 entry pages.")
