@@ -325,10 +325,10 @@ index += f"""
 </div></section>
 
 <section id="author" class="section"><div class="wrap author-in">
-  <div class="author-badge">MA</div>
+  <div class="author-badge">FA</div>
   <div>
-    <h2 class="sec-title" style="margin-bottom:.3rem;">Mohammed O. Alotaibi</h2>
-    <p class="sec-lede" style="margin:0;">IT specialist and engineering student, Al-Khobar, Saudi Arabia. [One or two more lines about you and this course.]</p>
+    <h2 class="sec-title" style="margin-bottom:.3rem;">Faisal Alrugaiti</h2>
+    <p class="sec-lede" style="margin:0;">[Your program and institution — one or two lines about you and this course.]</p>
   </div>
 </div></section>
 """
