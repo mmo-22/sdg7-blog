@@ -8,22 +8,43 @@ HEAD = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{css}">
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <div class="brand">
-    <a href="{home}">SDG&nbsp;7 · ENERGY PROJECT</a>
-    <span>MOHAMMED O. ALOTAIBI</span>
-  </div>
-</div></header>
+<div class="statusbar"><div class="row">
+  <span><span class="led"></span><b>GRID.MONITOR</b></span>
+  <span class="sys">SDG-7 // CLEAN ENERGY</span>
+  <span>OP: <b>M.O.ALOTAIBI</b></span>
+  <span>FREQ: <b>60.00 Hz</b></span>
+  <span class="clock" id="clk">--:--:--</span>
+</div></div>
+<div class="flow"><svg viewBox="0 0 860 88" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <rect class="node" x="30"  y="28" width="130" height="32" rx="4"/>
+  <rect class="node" x="365" y="28" width="130" height="32" rx="4"/>
+  <rect class="node" x="700" y="28" width="130" height="32" rx="4"/>
+  <text x="95"  y="48" text-anchor="middle">OIL / GAS</text>
+  <text x="430" y="48" text-anchor="middle">GRID · KSA</text>
+  <text x="765" y="48" text-anchor="middle">SOLAR PV</text>
+  <path class="wire"    d="M160 44 H365"/>
+  <path class="current" d="M160 44 H365"/>
+  <path class="wire"        d="M700 44 H495"/>
+  <path class="current alt" d="M700 44 H495"/>
+  <text x="262" y="34" text-anchor="middle" fill="#b97f13">TODAY</text>
+  <text x="597" y="34" text-anchor="middle" fill="#3ec6de">2030 →</text>
+</svg></div>
+<header class="site"></header>
 """
 
-FOOT = """<footer class="site"><div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;">
-  <span>Individual Project · 2026</span>
-  <span>Built for assessment — SDG 7: Affordable and Clean Energy</span>
+FOOT = """<footer class="site"><div class="wrap">
+  <span>INDIVIDUAL PROJECT · 2026 · ALL SYSTEMS NOMINAL</span>
+  <span>SDG 7 — AFFORDABLE AND CLEAN ENERGY</span>
 </div></footer>
+<script>
+(function(){var e=document.getElementById("clk");if(!e)return;
+function t(){e.textContent=new Date().toLocaleTimeString("en-GB",{hour12:false})+" AST"}
+t();setInterval(t,1000)})();
+</script>
 </body>
 </html>
 """
@@ -214,8 +235,8 @@ for e in ENTRIES:
     html += f"""<main class="wrap">
 <div class="post-head">
   <div class="meter">
-    <span class="cell">ENTRY {n:02d}/08</span>
-    <span class="cell">{e["stage_label"]}</span>
+    <span class="id">MODULE {n:02d}/08</span>
+    <span>{e["stage_label"]}</span>
     {charge(e["stage"])}
   </div>
   <h1>{e["title"]}</h1>
@@ -235,21 +256,24 @@ for e in ENTRIES:
 # ---- Build index ----
 cards = ""
 for e in ENTRIES:
-    cards += f"""<div class="card">
-  <div class="meter" style="border-top:none;">
-    <span class="cell">ENTRY {e["n"]:02d}</span>
-    <span class="cell">{e["stage_label"]}</span>
+    cards += f"""<div class="module">
+  <div class="head">
+    <span class="id">MODULE {e["n"]:02d}</span>
+    <span>{e["stage_label"]}</span>
     {charge(e["stage"])}
   </div>
-  <h2><a href="posts/entry-{e["n"]}.html">{e["title"]}</a></h2>
-  <p>{e["desc"]}</p>
+  <div class="body">
+    <h2><a href="posts/entry-{e["n"]}.html">{e["title"]}</a></h2>
+    <p>{e["desc"]}</p>
+  </div>
 </div>
 """
 
 index = HEAD.format(title="SDG 7 Project — Affordable and Clean Energy", css="assets/style.css", home="index.html")
 index += f"""<main class="wrap">
 <section class="hero">
-  <h1>Can the desert that exports oil run on <em>sunlight</em>?</h1>
+  <div class="eyebrow">/// PROJECT LOG — 8 MODULES — 5 ASSESSMENT STAGES</div>
+  <h1>Can the desert that exports oil<br>run on <span class="hl">sunlight</span>?</h1>
   <p class="lede">An eight-entry project blog assessing Saudi Arabia's current energy system against utility-scale solar, through the lens of UN Sustainable Development Goal 7 — with real measurements, real calculations, and a real audience.</p>
 </section>
 <section class="entries">
