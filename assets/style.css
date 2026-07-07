@@ -343,3 +343,91 @@ footer.site .clock { color: var(--cyan); }
   .banner-in { flex-direction: column; align-items: flex-start; }
   .banner-icon { width: 84px; height: 84px; }
 }
+
+/* =========================================================
+   MOBILE OVERHAUL — phones ≤ 700px
+   ========================================================= */
+img { max-width: 100%; }
+
+@media (max-width: 700px) {
+
+  /* NAV: logo row + scrollable links row (no cramping) */
+  .topnav .wrap { flex-wrap: wrap; row-gap: .35rem; padding-top: .6rem; padding-bottom: .55rem; }
+  .topnav .links {
+    width: 100%; overflow-x: auto; white-space: nowrap;
+    gap: 1.1rem; font-size: .7rem;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .topnav .links::-webkit-scrollbar { display: none; }
+
+  /* HERO: stop overlaying text on the image — stack instead */
+  .hero-site { display: flex; flex-direction: column; }
+  .hero-art img { height: 210px; object-position: center 30%; }
+  .hero-copy {
+    position: static; padding: 1.3rem 1.25rem 1.9rem;
+    background: linear-gradient(180deg, var(--bg-2), var(--bg));
+  }
+  .hero-copy h1 { font-size: 1.65rem; text-shadow: none; }
+  .hero-copy h1 br { display: none; }
+  .hero-copy .lede { text-shadow: none; font-size: .98rem; margin-bottom: 1.2rem; }
+  .cta-row .btn { padding: .75rem 1.1rem; }
+
+  /* STATS: 2 columns, tighter */
+  .stats-in { grid-template-columns: 1fr 1fr; gap: .8rem; padding: 1rem 1.25rem; }
+  .stat b { font-size: 1.2rem; }
+  .stat span { font-size: .62rem; }
+
+  /* SECTIONS */
+  .section { padding: 2.4rem 0; }
+  .sec-title { font-size: 1.35rem; }
+  .sec-lede { font-size: 1rem; }
+
+  /* TILES: full width, slightly shorter visual */
+  .grid { grid-template-columns: 1fr; }
+  .tile-visual { height: 96px; }
+
+  /* STAGES */
+  .stage { padding: .8rem .95rem; gap: .85rem; }
+  .stage-n { font-size: 1.35rem; min-width: 1.8rem; }
+
+  /* AUTHOR */
+  .author-in { flex-direction: column; align-items: flex-start; gap: .9rem; }
+
+  /* ENTRY BANNER */
+  .banner-in { padding-top: 1.6rem; padding-bottom: 1.5rem; gap: .9rem; }
+  .banner-icon { width: 70px; height: 70px; }
+  .banner-icon svg { width: 52px; height: 52px; }
+  .banner h1 { font-size: 1.45rem; }
+  .crumb { font-size: .62rem; gap: .5rem; }
+
+  /* ARTICLE: comfortable reading on phones */
+  article.post { font-size: 1rem; }
+  article.post h2 { font-size: 1.2rem; margin-top: 1.8rem; }
+  article.post h3 { font-size: 1.05rem; }
+  .todo { font-size: .78rem; padding: .7rem .85rem; }
+  .calc { font-size: .78rem; padding: .85rem .95rem; }
+
+  /* TABLES: horizontal scroll instead of squashing 5 columns */
+  table {
+    display: block; overflow-x: auto; white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  th, td { padding: .5rem .65rem; font-size: .84rem; }
+
+  /* long source URLs must not overflow */
+  .refs ol { word-break: break-word; overflow-wrap: anywhere; }
+
+  /* PAGER: stack full-width buttons */
+  .pager { flex-direction: column; }
+  .pager a { text-align: center; padding: .8rem 1rem; }
+
+  /* FOOTER */
+  footer.site .wrap { flex-direction: column; gap: .3rem; }
+}
+
+/* extra-small phones */
+@media (max-width: 380px) {
+  .hero-copy h1 { font-size: 1.45rem; }
+  .stats-in { grid-template-columns: 1fr 1fr; }
+  .stat b { font-size: 1.05rem; }
+}
